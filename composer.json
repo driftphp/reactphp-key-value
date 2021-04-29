@@ -1,8 +1,8 @@
 {
-    "name": "drift/react-cache",
+    "name": "drift/react-key-value",
     "description": "Lightweight library that provides dynamic and smart local cache to your ReactPHP applications.",
-    "keywords": ["ReactPHP", "cache"],
-    "homepage": "https://github.com/driftphp/reactphp-cache",
+    "keywords": ["ReactPHP", "key-value", "cache"],
+    "homepage": "https://github.com/driftphp/reactphp-key-value",
     "license": "MIT",
 
     "authors": [
