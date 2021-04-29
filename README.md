@@ -5,7 +5,7 @@
 Just a simple key-value local cache for your [ReactPHP](https://reactphp.org/)
 projects
 
-### Set a key
+## Set a key
 
 You can set a value given a key in this cache. As simple as it sounds.
 
@@ -33,7 +33,7 @@ $cache = new LocalKeyValueCache($loop);
 $cache->set('my_key', 'Any value', $ttl);
 ```
 
-### Get a key
+## Get a key
 
 You can get a value from this cache by using the key. If the value is present
 inside the cache, this one will be returned with no transformations. Otherwise,
@@ -88,7 +88,7 @@ $value = $cache->get('my_key', true); // Not Found
 With this strategy you will only save locally these values used most frequent,
 finding this way a nice equilibrium between cache efficiency and storage size.
 
-### Delete a key
+## Delete a key
 
 You can manually delete a key. If the key is not found inside the cache, nothing
 will happen.
