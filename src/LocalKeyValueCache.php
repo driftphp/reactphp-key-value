@@ -21,7 +21,7 @@ use React\EventLoop\TimerInterface;
 /**
  * Class LocalKeyValueCache.
  */
-class LocalKeyValueCache implements KeyValueCache
+final class LocalKeyValueCache implements KeyValueCache
 {
     private LoopInterface $loop;
     private array $cache = [];
@@ -65,13 +65,23 @@ class LocalKeyValueCache implements KeyValueCache
     }
 
     /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function has(string $key): bool
+    {
+        return array_key_exists($key, $this->cache);
+    }
+
+    /**
      * @param string     $key
      * @param mixed      $value
      * @param float|null $ttl
      *
      * @return void
      */
-    public function set(string $key, $value, float $ttl = null): void
+    public function set(string $key, $value, ?float $ttl = null): void
     {
         $this->cache[$key] = $value;
 

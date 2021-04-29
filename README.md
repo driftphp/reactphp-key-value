@@ -101,3 +101,40 @@ $loop = Factory::create();
 $cache = new LocalKeyValueCache($loop);
 $cache->delete('my_key');
 ```
+
+## Using the middleware
+
+In your applications you might want to use this cache as a simple and thin
+middleware layer, so you can easily enable and disable without changing your
+domain implementation.
+
+Well, then you should use the `KeyValueCacheMiddleware` class, acting as an
+uncoupled piece in the middle.
+
+So, having this original code in PHP
+
+```php
+return $this
+    ->dbConnection
+    ->find('token', '123');
+```
+
+You could easily add a simple layer that caches during 10 minutes, updating the
+key freshness each time this one es requested.
+
+```php
+use React\EventLoop\Factory;
+use Drift\Cache\LocalKeyValueCache;
+use Drift\Cache\KeyValueCacheMiddleware;
+
+$loop = Factory::create();
+$ttl = 600; // 10 minutes
+$cache = new LocalKeyValueCache($loop);
+$middleware = new KeyValueCacheMiddleware($cache);
+
+return $middleware->getOrAsk('token_123', function() {
+    return $this
+        ->dbConnection
+        ->find('token', '123');
+}, $ttl, true);
+```

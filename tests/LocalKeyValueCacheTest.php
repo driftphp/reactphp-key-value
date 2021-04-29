@@ -37,6 +37,21 @@ class LocalKeyValueCacheTest extends TestCase
         $cache->set('exists', 1);
         $this->assertNull($cache->get('not-exists'));
         $this->assertEquals('1', $cache->get('exists'));
+
+        $cache->set('exists', 1, null);
+        $this->assertEquals('1', $cache->get('exists'));
+    }
+
+    public function testHas()
+    {
+        $loop = Factory::create();
+        $cache = new LocalKeyValueCache($loop);
+        $cache->set('exists', 1);
+        $this->assertFalse($cache->has('not-exists'));
+        $this->assertTrue($cache->has('exists'));
+
+        $cache->set('exists', 1, null);
+        $this->assertTrue($cache->has('exists'));
     }
 
     public function testDelete()

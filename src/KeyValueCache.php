@@ -26,13 +26,20 @@ interface KeyValueCache
     public function get(string $key, bool $refreshTTL = false);
 
     /**
+     * @param string $key
+     *
+     * @return bool
+     */
+    public function has(string $key): bool;
+
+    /**
      * @param string     $key
      * @param mixed      $value
      * @param float|null $ttl
      *
      * @return void
      */
-    public function set(string $key, $value, float $ttl = null): void;
+    public function set(string $key, $value, ?float $ttl = null): void;
 
     /**
      * @param string $key
