@@ -1,0 +1,31 @@
+version: 2
+jobs:
+  test-php74:
+    working_directory: ~/project
+    steps:
+      - checkout
+
+      - run:
+          name: Run tests
+          command: |
+            composer update -n --prefer-dist
+            php vendor/bin/phpunit
+
+  test-php80:
+    working_directory: ~/project
+    steps:
+      - checkout
+
+      - run:
+          name: Run tests
+          command: |
+            composer update -n --prefer-dist
+            php vendor/bin/phpunit
+
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test-php74
+      - test-php80
